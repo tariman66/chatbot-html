@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Chatbot AI Sederhana</title>
+  <style>
+    body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+    #chatbox { background: #fff; border: 1px solid #ccc; height: 300px; overflow-y: scroll; padding: 10px; margin-bottom: 10px; }
+    input { width: 70%; padding: 10px; }
+    button { padding: 10px; }
+    .user { color: blue; }
+    .bot { color: green; }
+  </style>
+</head>
+<body>
+  <h2>Chatbot Sederhana</h2>
+  <div id="chatbox"></div>
+  <input type="text" id="input" placeholder="Tulis pesan...">
+  <button onclick="send()">Kirim</button>
+
+  <script>
+    function botReply(msg) {
+      msg = msg.toLowerCase();
+      if (msg.includes("halo")) return "Halo juga! Ada yang bisa saya bantu?";
+      if (msg.includes("produk")) return "Kami menjual sembako, pulsa, dan air galon.";
+      if (msg.includes("alamat")) return "Toko kami di Jl. Mawar No. 12.";
+      if (msg.includes("dana")) return "Ya, kami menerima pembayaran lewat DANA.";
+      return "Maaf, saya belum mengerti pertanyaan kamu.";
+    }
+
+    function send() {
+      const input = document.getElementById("input");
+      const chatbox = document.getElementById("chatbox");
+      const userMsg = input.value.trim();
+      if (!userMsg) return;
+
+      chatbox.innerHTML += `<p class="user"><b>Kamu:</b> ${userMsg}</p>`;
+      const reply = botReply(userMsg);
+      chatbox.innerHTML += `<p class="bot"><b>Bot:</b> ${reply}</p>`;
+      input.value = "";
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+  </script>
+</body>
+</html>
